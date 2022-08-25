@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		81A2CFEB28B799450054C4FF /* ConstRouteSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A2CFEA28B799450054C4FF /* ConstRouteSegue.swift */; };
 		81A343F328B139BD00942D0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A343F228B139BD00942D0E /* AppDelegate.swift */; };
 		81A343F528B139BD00942D0E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A343F428B139BD00942D0E /* SceneDelegate.swift */; };
 		81A343FA28B139BD00942D0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81A343F828B139BD00942D0E /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		81A2CFEA28B799450054C4FF /* ConstRouteSegue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstRouteSegue.swift; sourceTree = "<group>"; };
 		81A343EF28B139BD00942D0E /* My game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "My game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81A343F228B139BD00942D0E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81A343F428B139BD00942D0E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				81A343F428B139BD00942D0E /* SceneDelegate.swift */,
 				81A3441628B18DD400942D0E /* ViewControllerPlusAppDelegate.swift */,
 				81A3440928B13AEB00942D0E /* GamesTableViewCell.swift */,
+				81A2CFEA28B799450054C4FF /* ConstRouteSegue.swift */,
 				81F6D7A528B45F8F0060E9E0 /* ConsoleManager.swift */,
 				81A3440E28B13B3500942D0E /* GamesTableViewController.swift */,
 				81A3441028B13B5700942D0E /* ConsoleTableViewController.swift */,
@@ -169,6 +172,7 @@
 				81F6D7A628B45F8F0060E9E0 /* ConsoleManager.swift in Sources */,
 				81A3440A28B13AEB00942D0E /* GamesTableViewCell.swift in Sources */,
 				81A3441328B13B7400942D0E /* ShowGamesViewController.swift in Sources */,
+				81A2CFEB28B799450054C4FF /* ConstRouteSegue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

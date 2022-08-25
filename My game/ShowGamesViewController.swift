@@ -8,21 +8,42 @@
 import UIKit
 
 class ShowGamesViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-			  
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+	
+	
+	@IBOutlet weak var imgGame: UIImageView!
+	@IBOutlet weak var labReleaseDate: UILabel!
+	@IBOutlet weak var labGameName: UILabel!
+	@IBOutlet weak var labConsole: UILabel!
+	
+	var game: Game!
+	
+	override func viewDidLoad() {
+		super.viewDidLoad()
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(true)
+		if game != nil {
+			title = "Edit game"
+			labGameName.text = game.name
+			if let img = game.img as? UIImage {
+				imgGame.image = img
+			}else {
+				imgGame.image = UIImage(named: "noCoverFull")
+			}
+			
+			if let  date = game.dateRelease {
+				let formatter = DateFormatter()
+				//mostrar ano,mes ..
+				formatter.dateStyle = .long
+				//				//formatar em BR
+				//				formatter.locale = Locale(identifier: "pt-BR")
+				let dateFormated = formatter.string(from: date)
+				labReleaseDate.text = "Year release: \(dateFormated)"
+			}
+			labConsole.text = game.console?.name
+		}
+		
+	}
+	
 }

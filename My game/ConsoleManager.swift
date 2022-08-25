@@ -9,12 +9,31 @@ import Foundation
 import CoreData
 
 struct ConsoleManager {
-	 
 	
-	let console: [Console] = []
 	
-	func loadConsole(_ context: NSManagedObjectContext)  {		
+	var consoles: [Console] = []
+	
+	mutating func loadConsole(_ context: NSManagedObjectContext)   {
+		let fetchRequest = Console.fetchRequest()
+		let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+		fetchRequest.sortDescriptors = [sortDescriptor]
+		
+		do {
+			consoles = try context.fetch(fetchRequest)
+		}catch {
+			print(error.localizedDescription)
+		}
+		
 	}
 	
+	func deleteConsole(index: Int,context: NSManagedObjectContext ) {
+		let delete = consoles[index]
+		context.delete(delete)
+		do {
+			try context.save()
+		}catch {
+			print(error.localizedDescription)
+		}
+	}
 	
 }

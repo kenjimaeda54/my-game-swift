@@ -24,6 +24,18 @@ class GamesTableViewController: UITableViewController {
 		
 	}
 	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		
+		if segue.identifier == ConstRouteSegue.gameSegue  {
+			let vc = segue.destination as! ShowGamesViewController
+			//indexPathForSelectedRow.row pego o index do row selecionado
+			if let games = resultFetchController.fetchedObjects,let index =  tableView.indexPathForSelectedRow?.row {
+				vc.game = games[index]
+			}
+			
+		}
+	}
+	
 	func loadGame()  {
 		let fetchRequest = Game.fetchRequest()
 		let sortDescritor = NSSortDescriptor(key: "name", ascending: true)
@@ -49,6 +61,7 @@ class GamesTableViewController: UITableViewController {
 		
 		return count
 	}
+	
 	
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

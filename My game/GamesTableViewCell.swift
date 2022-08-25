@@ -21,12 +21,12 @@ class GamesTableViewCell: UITableViewCell {
 	
 	
 	func prepareCell(_ game: Game) {
-		
-		
+
 		labName.text =  game.name
 		labConsole.text = game.console?.name
 		
 		if let img = game.img as? UIImage {
+
 			imgGame.image = img
 			
 		}else {
