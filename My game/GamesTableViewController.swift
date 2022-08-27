@@ -54,7 +54,13 @@ class GamesTableViewController: UITableViewController {
 		
 	}
 	
-	
+	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+		if editingStyle == .delete {
+			if let game = resultFetchController.fetchedObjects?[indexPath.row] {
+				context.delete(game)
+			}
+		}
+	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		let count = resultFetchController.fetchedObjects?.count ?? 0
@@ -83,6 +89,9 @@ extension GamesTableViewController: NSFetchedResultsControllerDelegate {
 		
 		switch type {
 		case .delete:
+			if let index = indexPath {
+				tableView.deleteRows(at: [index], with: .fade)
+			}
 			break
 		default:
 			tableView.reloadData()

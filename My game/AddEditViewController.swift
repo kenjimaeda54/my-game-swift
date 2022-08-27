@@ -9,6 +9,7 @@ import UIKit
 
 class AddEditViewController: UIViewController {
 	
+	@IBOutlet weak var btnAddEdit: UIButton!
 	@IBOutlet weak var txfConsole: UITextField!
 	@IBOutlet weak var txfGame: UITextField!
 	@IBOutlet weak var btAddImg: UIButton!
@@ -32,7 +33,33 @@ class AddEditViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		consoleManager.loadConsole(context)
+		formatedTollBar()
+		if game != nil {
+			title = "Edit"
+			btnAddEdit.setTitle("Edit", for: .normal)
+			txfGame.text = game.name
+			
+			if let image =  game.img as? UIImage {
+				imgCover.image = image
+				btAddImg.setTitle(nil, for: .normal)
+			}
+			
+			//tentar pegar o index do console que esta nosso arrray
+			if let console = game.console , let index = consoleManager.consoles.firstIndex(of: console) {
+				 print(index)
+				txfConsole.text = console.name
+				pickerView.selectRow(index, inComponent: 0, animated: true)
+			}
+			
+			if let date = game.dateRelease {
+				datePicker.date = date
+			}
+			
+		}
 		
+	}
+	
+	func formatedTollBar() {
 		let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 40))
 		let done = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
 		let cancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))

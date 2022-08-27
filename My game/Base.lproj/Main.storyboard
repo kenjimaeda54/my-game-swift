@@ -228,9 +228,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="HqF-qR-Vns">
-                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="4u8-XV-uvA">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="oaX-ry-h4p">
                             <connections>
-                                <segue destination="MlI-Bq-xBm" kind="show" id="DbQ-mM-iWS"/>
+                                <segue destination="MlI-Bq-xBm" kind="show" identifier="editSegue" id="Cac-LQ-Y8g"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -358,6 +358,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btAddImg" destination="ALi-5r-yZG" id="RpA-hE-IYE"/>
+                        <outlet property="btnAddEdit" destination="5DV-ET-IjV" id="PWK-df-G8F"/>
                         <outlet property="datePicker" destination="TPh-wS-44F" id="ibS-N1-wZg"/>
                         <outlet property="imgCover" destination="FId-kw-aJn" id="ovu-xI-eW9"/>
                         <outlet property="txfConsole" destination="ESg-vu-6Vs" id="Spp-IM-RRx"/>
@@ -370,12 +371,11 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="DbQ-mM-iWS"/>
+        <segue reference="Cac-LQ-Y8g"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="console" width="23" height="23"/>
         <image name="game" width="23" height="23"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
         <namedColor name="main">
             <color red="0.0" green="0.68199998140335083" blue="0.875" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

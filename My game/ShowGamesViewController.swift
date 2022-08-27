@@ -21,10 +21,18 @@ class ShowGamesViewController: UIViewController {
 		super.viewDidLoad()
 	}
 	
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if segue.identifier == "editSegue" {
+			let vc = segue.destination as! AddEditViewController
+			vc.game = game
+		}
+	}
+	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(true)
 		if game != nil {
-			title = "Edit game"
+			title = "Game"
 			labGameName.text = game.name
 			if let img = game.img as? UIImage {
 				imgGame.image = img
