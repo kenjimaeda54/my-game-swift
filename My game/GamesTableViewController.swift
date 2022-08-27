@@ -12,6 +12,8 @@ class GamesTableViewController: UITableViewController {
 	
 	var resultFetchController: NSFetchedResultsController<Game>!
 	let cellSpacingHeight: CGFloat = 5
+	//vai aparecer aqui
+	let searchController = UISearchController(searchResultsController: nil)
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -20,8 +22,19 @@ class GamesTableViewController: UITableViewController {
 		app.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
 		app.backgroundColor = UIColor(named: "main")
 		self.navigationController?.navigationBar.scrollEdgeAppearance = app
+		searchController.searchResultsUpdater = self
+		searchController.obscuresBackgroundDuringPresentation  = false
+		searchController.searchBar.barTintColor = .white
+		searchController.searchBar.tintColor = .white
+		navigationItem.searchController = searchController
+		searchController.searchBar.delegate = self
 		loadGame()
 		
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		tableView.reloadData()
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -36,11 +49,22 @@ class GamesTableViewController: UITableViewController {
 		}
 	}
 	
-	func loadGame()  {
+	func loadGame(_ filter: String = "")  {
 		let fetchRequest = Game.fetchRequest()
 		let sortDescritor = NSSortDescriptor(key: "name", ascending: true)
 		fetchRequest.sortDescriptors = [sortDescritor]
+		
+		//predicate e para fazer um filtro no core data
+		if !filter.isEmpty {
+			//format [c] -> case insensitve aceita maisculo minusculo
+			//format %@ tudo que estiver em arguments vai para format
+			let predicate = NSPredicate(format: "name contains [c] %@",  filter)
+			fetchRequest.predicate = predicate
+			
+		}
+		
 		resultFetchController =  NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+		
 		
 		//com delegate garanto que qualquer mudanca no banco de dados
 		//vai ser exectuado os metodos que implementei neste delegate
@@ -58,6 +82,11 @@ class GamesTableViewController: UITableViewController {
 		if editingStyle == .delete {
 			if let game = resultFetchController.fetchedObjects?[indexPath.row] {
 				context.delete(game)
+			}
+			do {
+				try context.save()
+			}catch  {
+				print(error.localizedDescription)
 			}
 		}
 	}
@@ -83,6 +112,8 @@ class GamesTableViewController: UITableViewController {
 	
 }
 
+
+//MARK: - NSFetchedResultsControllerDelegate
 extension GamesTableViewController: NSFetchedResultsControllerDelegate {
 	//esse metodo e sempre ac/Users/kenjimaeda/Documents/projects_IOS/My games/My game/AddEditViewController.swiftionado quando ha uma mudanca no banco de dados
 	func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
@@ -97,6 +128,28 @@ extension GamesTableViewController: NSFetchedResultsControllerDelegate {
 			tableView.reloadData()
 		}
 		
+	}
+	
+}
+
+//MARK: - UISearchBarDelegate,UISearchResultsUpdating
+
+extension GamesTableViewController: UISearchBarDelegate,UISearchResultsUpdating {
+	func updateSearchResults(for searchController: UISearchController) {
+		
+	}
+	
+	
+	func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+		loadGame()
+		tableView.reloadData()
+	}
+	
+	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+		if let text = searchBar.text {
+			loadGame(text)
+		}
+		tableView.reloadData()
 	}
 	
 }

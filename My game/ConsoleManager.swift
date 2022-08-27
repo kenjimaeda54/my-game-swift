@@ -26,11 +26,12 @@ struct ConsoleManager {
 		
 	}
 	
-	func deleteConsole(index: Int,context: NSManagedObjectContext ) {
+mutating	func deleteConsole(index: Int,context: NSManagedObjectContext ) {
 		let delete = consoles[index]
 		context.delete(delete)
 		do {
 			try context.save()
+			consoles.remove(at: index)
 		}catch {
 			print(error.localizedDescription)
 		}

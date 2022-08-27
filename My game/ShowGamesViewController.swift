@@ -32,7 +32,7 @@ class ShowGamesViewController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(true)
 		if game != nil {
-			title = "Game"
+			title = "Game details"
 			labGameName.text = game.name
 			if let img = game.img as? UIImage {
 				imgGame.image = img

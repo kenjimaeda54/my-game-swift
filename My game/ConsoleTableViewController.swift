@@ -65,6 +65,18 @@ class ConsoleTableViewController: UITableViewController {
 		return consoleManager.consoles.count
 	}
 	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let console = consoleManager.consoles[indexPath.row]
+		showAllert(console)
+	}
+	
+	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+		if editingStyle == .delete {
+			consoleManager.deleteConsole(index: indexPath.row, context: context)
+			tableView.deleteRows(at: [indexPath], with: .fade)
+		}
+	}
+	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 		let console = consoleManager.consoles[indexPath.row]
